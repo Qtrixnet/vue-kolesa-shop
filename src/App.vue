@@ -1,15 +1,191 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="page">
+      <header class="header">
+        <a
+          class="header__logo"
+          href="https://www.example.com"
+          target="_blank"
+        ></a>
+        <div class="header__container">
+          <form class="header__search-container">
+            <input
+              class="header__search"
+              required
+              placeholder="Поиск"
+              type="text"
+            />
+            <button class="header__search-button" type="submit"></button>
+          </form>
+          <a
+            class="header__link"
+            target="_blank"
+            href="https://www.example.com/"
+          >
+            <div class="header__avatar"></div>
+            <div class="header__user-info">
+              <span class="header__user-name">Мортиджан</span>
+              <span class="header__user-money">300 баллов</span>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <div class="navigation">
+        <aside class="navigation__wrapper">
+          <nav class="navigation__container">
+            <a
+              target="_blank"
+              class="navigation__link"
+              href="https://www.example.com/"
+              >Оргсхема</a
+            >
+            <a
+              target="_blank"
+              class="navigation__link"
+              href="https://www.example.com/"
+              >Kolesa Team</a
+            >
+            <a
+              target="_blank"
+              class="navigation__link navigation__link_active"
+              href="https://www.example.com/"
+              >Kolesa Shop</a
+            >
+            <a
+              target="_blank"
+              class="navigation__link"
+              href="https://www.example.com/"
+              >Картина компании</a
+            >
+            <a
+              target="_blank"
+              class="navigation__link"
+              href="https://www.example.com/"
+              >Новости</a
+            >
+            <a
+              target="_blank"
+              class="navigation__link"
+              href="https://www.example.com/"
+              >Education</a
+            >
+            <a
+              target="_blank"
+              class="navigation__link"
+              href="https://www.example.com/"
+              >Guidelines</a
+            >
+            <a
+              target="_blank"
+              class="navigation__link"
+              href="https://www.example.com/"
+              >Библиотека</a
+            >
+            <a
+              target="_blank"
+              class="navigation__link"
+              href="https://www.example.com/"
+              >FAQ</a
+            >
+          </nav>
+        </aside>
+
+        <main class="main">
+          <h1 class="main__title">Магазин мерча Kolesa Group</h1>
+          <img
+            class="main__image"
+            width="1038"
+            height="335"
+            src="./src/images/main-banner.jpg"
+            alt="Главный баннер"
+          />
+          <div class="main__point-button-container">
+            <button class="main__point-button main__point-button_add">
+              Получить баллы
+            </button>
+            <button class="main__point-button main__point-button_how">
+              Как получить баллы
+            </button>
+            <button class="main__point-button main__point-button_gift">
+              Подарить баллы
+            </button>
+          </div>
+          <div class="main__category-button-container">
+            <button
+              data-category="all"
+              class="main__category-button main__category-button_active"
+            >
+              Все товары
+            </button>
+            <button data-category="clothes" class="main__category-button">
+              Одежда
+            </button>
+            <button data-category="accessories" class="main__category-button">
+              Аксессуары
+            </button>
+          </div>
+          <ul class="cards-list">
+            <!-- Контейнер для рендеринга карточек товара -->
+          </ul>
+        </main>
+      </div>
+
+      <footer class="footer">
+        <div class="footer__container">
+          <div class="footer__social">
+            <span class="footer__social-title">Kolesa Group</span>
+            <ul class="footer__social-list">
+              <li class="footer__social-list-item">
+                <a
+                  target="_blank"
+                  class="footer__social-link footer__social-link_instagram"
+                  href="https://www.example.com/"
+                ></a>
+              </li>
+              <li class="footer__social-list-item">
+                <a
+                  target="_blank"
+                  class="footer__social-link footer__social-link_youtube"
+                  href="https://www.example.com/"
+                ></a>
+              </li>
+              <li class="footer__social-list-item">
+                <a
+                  target="_blank"
+                  class="footer__social-link footer__social-link_vk"
+                  href="https://www.example.com/"
+                ></a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer__info">
+            <div class="footer__info-text">
+              <span class="footer__info-subtitle"
+                >Есть идеи что улучшить?
+              </span>
+              <span class="footer__info-subtitle"
+                >Не знаешь, с кем решить проблему?</span
+              >
+            </div>
+            <a
+              class="footer__link"
+              target="_blank"
+              href="https://www.example.com/"
+              >Написать</a
+            >
+          </div>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld,
   },
