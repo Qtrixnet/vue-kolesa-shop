@@ -97,7 +97,7 @@
             class="main__image"
             width="1038"
             height="335"
-            src="./src/images/main-banner.jpg"
+            src="@/assets/images/main-banner.jpg"
             alt="Главный баннер"
           />
           <div class="main__point-button-container">
@@ -182,23 +182,12 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
-  name: "App",
-  components: {
-    HelloWorld,
-  },
+  name: 'App',
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import './assets/styles/index.scss'
 </style>
