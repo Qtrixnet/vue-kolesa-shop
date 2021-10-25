@@ -127,6 +127,7 @@
           </div>
           <ul class="cards-list">
             <!-- Контейнер для рендеринга карточек товара -->
+            <card></card>
           </ul>
         </main>
       </div>
@@ -177,27 +178,45 @@
           </div>
         </div>
       </footer>
-      <popup></popup>
+      <popup :isOpen="isShow"></popup>
     </div>
   </div>
 </template>
 
 <script>
 import Popup from './components/Popup.vue';
+import Card from './components/Card.vue';
 
 export default {
   name: 'App',
   components: {
     Popup,
+    Card,
   },
   data() {
     return {
-      isShow: true,
+      isShow: false,
+      cards: [
+        { id: 1, name: 'Одежда' },
+        { id: 2, name: 'Одежда' },
+        { id: 3, name: 'Одежда' },
+        { id: 4, name: 'Одежда' },
+        { id: 5, name: 'Одежда' },
+        { id: 6, name: 'Одежда' },
+      ],
     };
+  },
+  methods: {
+    openPopup() {
+      this.isShow = true;
+    },
+    closePopup() {
+      this.isShow = false;
+    },
   },
 };
 </script>
 
 <style lang="scss">
-@import './assets/styles/index.scss'
+@import "./assets/styles/index.scss";
 </style>

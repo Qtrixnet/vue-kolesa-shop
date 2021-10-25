@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isShow" class="popup">
+  <div v-if="isOpen" class="popup">
     <div class="popup__window">
       <div class="popup__slider">
         <img
@@ -110,6 +110,9 @@
 <script>
 export default {
   name: 'Popup',
+  props: {
+    isOpen: Boolean,
+  },
   data() {
     return {
       isShow: true,
