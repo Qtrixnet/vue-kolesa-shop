@@ -177,14 +177,24 @@
           </div>
         </div>
       </footer>
+      <popup></popup>
     </div>
   </div>
 </template>
 
 <script>
+import Popup from './components/Popup.vue';
 
 export default {
   name: 'App',
+  components: {
+    Popup,
+  },
+  data() {
+    return {
+      isShow: true,
+    };
+  },
 };
 </script>
 

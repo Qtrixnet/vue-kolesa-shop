@@ -1,0 +1,56 @@
+.navigation {
+    display: flex;
+
+    @include max-width;
+
+    margin: 0 auto;
+    padding: 0 89px 0 32px;
+    justify-content: space-between;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        padding-right: 100px;
+        min-width: 248px;
+    }
+
+    &__link {
+        @include main-text;
+
+        color: rgba(28, 24, 25, 1);
+        text-decoration: none;
+        position: relative;
+        transition: all 0.2s ease;
+        margin-bottom: 26px;
+
+        &:nth-last-of-type(1) {
+            margin: 0;
+        }
+
+        &:hover {
+            color: $blue-primary;
+        }
+
+        &_active {
+            font-weight: 600;
+
+            &:hover {
+                color: $black;
+            }
+
+            &::before {
+                content: '';
+                width: 4px;
+                min-height: 36px;
+                height: 100%;
+                display: block;
+                background-color: $blue-primary;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                border-radius: 10px;
+                transform: translate(-12px, -50%);
+            }
+        }
+    }
+}
