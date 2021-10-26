@@ -7,8 +7,6 @@
           width="330"
           height="330"
           class="card__image"
-          src="@/assets/images/product-images/amr-taha.jpg"
-          alt="${name}"
         />
         <span class="card__new">new</span>
       </div>
@@ -16,7 +14,7 @@
         <span class="card__price">190 баллов</span>
         <h2 class="card__title">Название товара</h2>
         <span class="card__scale">Размеры</span>
-        <button class="card__button">Заказать</button>
+        <button @click="openPopup(item)" class="card__button">Заказать</button>
       </div>
     </div>
   </li>
@@ -25,13 +23,23 @@
 <script>
 export default {
   name: 'Card',
+  props: {
+    item: Object,
+  },
   methods: {
     openPopup() {
       this.isShow = true;
+      this.$emit('openPopup', this.item);
     },
     closePopup() {
       this.isShow = false;
     },
   },
+  // methods: {
+  //   openCard(item) {
+  //     console.log(item);
+  //     this.$emit("openCard", this.item);
+  //   },
+  // },
 };
 </script>

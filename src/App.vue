@@ -1,36 +1,7 @@
 <template>
   <div id="app">
     <div class="page">
-      <header class="header">
-        <a
-          class="header__logo"
-          href="https://www.example.com"
-          target="_blank"
-        ></a>
-        <div class="header__container">
-          <form class="header__search-container">
-            <input
-              class="header__search"
-              required
-              placeholder="Поиск"
-              type="text"
-            />
-            <button class="header__search-button" type="submit"></button>
-          </form>
-          <a
-            class="header__link"
-            target="_blank"
-            href="https://www.example.com/"
-          >
-            <div class="header__avatar"></div>
-            <div class="header__user-info">
-              <span class="header__user-name">Мортиджан</span>
-              <span class="header__user-money">300 баллов</span>
-            </div>
-          </a>
-        </div>
-      </header>
-
+      <Header @updateUserInfo="updateUserInfo" :infoUser="infoUser"></Header>
       <div class="navigation">
         <aside class="navigation__wrapper">
           <nav class="navigation__container">
@@ -127,7 +98,9 @@
           </div>
           <ul class="cards-list">
             <!-- Контейнер для рендеринга карточек товара -->
-            <card></card>
+            <card
+            @togglePopup="togglePopup"
+            @openPopup="openPopup"></card>
           </ul>
         </main>
       </div>
@@ -178,24 +151,54 @@
           </div>
         </div>
       </footer>
-      <popup :isOpen="isShow"></popup>
+      <popup @togglePopup="togglePopup" :isOpen="isShow"></popup>
     </div>
   </div>
 </template>
 
 <script>
+import Header from './components/Header.vue';
 import Popup from './components/Popup.vue';
 import Card from './components/Card.vue';
 
 export default {
   name: 'App',
   components: {
+    Header,
     Popup,
     Card,
+  },
+  computed: {
+    allCards() {
+      console.log(this.clothes);
+      return [...this.clothes, ...this.accessories];
+    },
+
+    allCardsSorted() {
+      return this.allCards
+        .slice()
+        .sort((card) => (!card.isNew ? 1 : -1));
+    },
+
+    filterCategories() {
+      console.log(1);
+      if (this.selectedTab === 'all') {
+        console.log(2);
+        return this.allCardsSorted;
+      }
+      if (this.selectedTab === 'clothes') {
+        console.log(3);
+        return this.clothes;
+      }
+      console.log(4);
+      return this.accessories;
+    },
+
   },
   data() {
     return {
       isShow: false,
+      selectedTab: 'all',
       cards: [
         { id: 1, name: 'Одежда' },
         { id: 2, name: 'Одежда' },
@@ -207,12 +210,50 @@ export default {
     };
   },
   methods: {
-    openPopup() {
-      this.isShow = true;
+    getClothes() {
+      fetch('https://api.json-generator.com/templates/-_RLsEGjof6i/data', {
+        headers: {
+          Authorization: 'Bearer rhhrmjvdvcv0ka4e6ouao9a1gj42fbjim5bcu60f',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          this.clothes = data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    closePopup() {
-      this.isShow = false;
+    getAccessories() {
+      fetch('https://api.json-generator.com/templates/q3OPxRyEcPvP/data', {
+        headers: {
+          Authorization: 'Bearer rhhrmjvdvcv0ka4e6ouao9a1gj42fbjim5bcu60f',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          this.accessories = data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
+    openPopup(item) {
+      this.togglePopup();
+      this.popupData = item;
+    },
+    togglePopup() {
+      this.isPopupShow = !this.isPopupShow;
+    },
+    updateUserInfo(userInfo) {
+      this.infoUser = userInfo;
+    },
+  },
+  created() {
+    this.getClothes();
+    this.getAccessories();
   },
 };
 </script>
