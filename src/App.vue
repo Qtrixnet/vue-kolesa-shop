@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <div class="page">
-      <Header @updateUserInfo="updateUserInfo" :infoUser="infoUser"></Header>
+      <Header @updateUserInfo="updateUserInfo" :infoUser="infoUser" />
       <div class="navigation">
         <Navigation
           :nav-links="navLinks"
           :selected-link="selectedLink"
           @setActiveLink="changeActiveLink"
-        ></Navigation>
+        />
 
         <main class="main">
           <h1 class="main__title">Магазин мерча Kolesa Group</h1>
@@ -51,53 +51,7 @@
           </ul>
         </main>
       </div>
-
-      <footer class="footer">
-        <div class="footer__container">
-          <div class="footer__social">
-            <span class="footer__social-title">Kolesa Group</span>
-            <ul class="footer__social-list">
-              <li class="footer__social-list-item">
-                <a
-                  target="_blank"
-                  class="footer__social-link footer__social-link_instagram"
-                  href="https://www.example.com/"
-                ></a>
-              </li>
-              <li class="footer__social-list-item">
-                <a
-                  target="_blank"
-                  class="footer__social-link footer__social-link_youtube"
-                  href="https://www.example.com/"
-                ></a>
-              </li>
-              <li class="footer__social-list-item">
-                <a
-                  target="_blank"
-                  class="footer__social-link footer__social-link_vk"
-                  href="https://www.example.com/"
-                ></a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer__info">
-            <div class="footer__info-text">
-              <span class="footer__info-subtitle"
-                >Есть идеи что улучшить?
-              </span>
-              <span class="footer__info-subtitle"
-                >Не знаешь, с кем решить проблему?</span
-              >
-            </div>
-            <a
-              class="footer__link"
-              target="_blank"
-              href="https://www.example.com/"
-              >Написать</a
-            >
-          </div>
-        </div>
-      </footer>
+      <Footer />
       <popup @togglePopup="togglePopup" :isOpen="isShow"></popup>
     </div>
   </div>
@@ -108,6 +62,16 @@ import Header from './components/Header.vue';
 import Popup from './components/Popup.vue';
 import Card from './components/Card.vue';
 import Navigation from './components/Navigation.vue';
+import Footer from './components/Footer.vue';
+
+//* Модалка
+//* Блок поиск
+//* Блок пользователь
+//* Навигационный меню (Nav sidebar)
+//! Горячая кнопка
+//! Фильтр
+//* Карточка товара
+//! Подвал (Footer)
 
 export default {
   name: 'App',
@@ -116,6 +80,7 @@ export default {
     Popup,
     Card,
     Navigation,
+    Footer,
   },
   computed: {
     allCards() {
@@ -151,39 +116,39 @@ export default {
       navLinks: [
         {
           name: 'Оргсхема',
-          slug: 'orgscheme',
+          url: 'orgscheme',
         },
         {
           name: 'Kolesa Team',
-          slug: 'team',
+          url: 'team',
         },
         {
           name: 'Kolesa Shop',
-          slug: 'shop',
+          url: 'shop',
         },
         {
           name: 'Картина компании',
-          slug: 'overview',
+          url: 'overview',
         },
         {
           name: 'Новости',
-          slug: 'news',
+          url: 'news',
         },
         {
           name: 'Education',
-          slug: 'education',
+          url: 'education',
         },
         {
           name: 'Guidelines',
-          slug: 'guidelines',
+          url: 'guidelines',
         },
         {
           name: 'Библиотека',
-          slug: 'library',
+          url: 'library',
         },
         {
           name: 'FAQ',
-          slug: 'faq',
+          url: 'faq',
         },
       ],
       selectedLink: 'shop',
@@ -227,6 +192,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    changeActiveLink(link) {
+      this.selectedLink = link.url;
     },
     openPopup(item) {
       this.togglePopup();

@@ -4,7 +4,7 @@
       <a
         target="_blank"
         class="navigation__link"
-        :class="{ 'navigation__link_active': selectedLink === link.slug }"
+        :class="{ 'navigation__link_active': selectedLink === link.url }"
         href="https://www.example.com/"
         v-for="(link, index) in navLinks" :key="index"
         @click="setActiveLink(link)"

@@ -6,7 +6,7 @@
       target="_blank"
     ></a>
     <div class="header__container">
-      <Search></Search>
+      <Search />
       <UserInfo @updateUserInfo="updateUserInfo" :infoUser="infoUser" />
 
     </div>
