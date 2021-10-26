@@ -6,15 +6,7 @@
       target="_blank"
     ></a>
     <div class="header__container">
-      <form class="header__search-container">
-        <input
-          class="header__search"
-          required
-          placeholder="Поиск"
-          type="text"
-        />
-        <button class="header__search-button" type="submit"></button>
-      </form>
+      <Search></Search>
       <UserInfo @updateUserInfo="updateUserInfo" :infoUser="infoUser" />
 
     </div>
@@ -23,11 +15,12 @@
 
 <script>
 import UserInfo from './UserInfo.vue';
+import Search from './Search.vue';
 
 export default {
   name: 'Header',
   components: {
-    // HeaderSearch,
+    Search,
     UserInfo,
   },
   props: {
