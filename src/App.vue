@@ -18,17 +18,7 @@
             src="@/assets/images/main-banner.jpg"
             alt="Главный баннер"
           />
-          <div class="main__point-button-container">
-            <button class="main__point-button main__point-button_add">
-              Получить баллы
-            </button>
-            <button class="main__point-button main__point-button_how">
-              Как получить баллы
-            </button>
-            <button class="main__point-button main__point-button_gift">
-              Подарить баллы
-            </button>
-          </div>
+          <HotButtons />
           <div class="main__category-button-container">
             <button
               data-category="all"
@@ -63,6 +53,7 @@ import Popup from './components/Popup.vue';
 import Card from './components/Card.vue';
 import Navigation from './components/Navigation.vue';
 import Footer from './components/Footer.vue';
+import HotButtons from './components/HotButtons.vue';
 
 //* Модалка
 //* Блок поиск
@@ -71,7 +62,7 @@ import Footer from './components/Footer.vue';
 //! Горячая кнопка
 //! Фильтр
 //* Карточка товара
-//! Подвал (Footer)
+//* Подвал (Footer)
 
 export default {
   name: 'App',
@@ -81,6 +72,7 @@ export default {
     Card,
     Navigation,
     Footer,
+    HotButtons,
   },
   computed: {
     allCards() {
