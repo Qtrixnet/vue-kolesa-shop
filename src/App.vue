@@ -19,20 +19,11 @@
             alt="Главный баннер"
           />
           <HotButtons />
-          <div class="main__category-button-container">
-            <button
-              data-category="all"
-              class="main__category-button main__category-button_active"
-            >
-              Все товары
-            </button>
-            <button data-category="clothes" class="main__category-button">
-              Одежда
-            </button>
-            <button data-category="accessories" class="main__category-button">
-              Аксессуары
-            </button>
-          </div>
+          <FilterButtons
+            :tabs="tabs"
+            :selected-tab="selectedTab"
+            @setActiveTab="changeActiveTab"
+          />
           <ul class="cards-list">
             <!-- Контейнер для рендеринга карточек товара -->
             <card
@@ -54,12 +45,13 @@ import Card from './components/Card.vue';
 import Navigation from './components/Navigation.vue';
 import Footer from './components/Footer.vue';
 import HotButtons from './components/HotButtons.vue';
+import FilterButtons from './components/FilterButtons.vue';
 
 //* Модалка
 //* Блок поиск
 //* Блок пользователь
 //* Навигационный меню (Nav sidebar)
-//! Горячая кнопка
+//* Горячая кнопка
 //! Фильтр
 //* Карточка товара
 //* Подвал (Footer)
@@ -73,6 +65,7 @@ export default {
     Navigation,
     Footer,
     HotButtons,
+    FilterButtons,
   },
   computed: {
     allCards() {
@@ -105,6 +98,20 @@ export default {
     return {
       isShow: false,
       selectedTab: 'all',
+      tabs: [
+        {
+          name: 'Все товары',
+          url: 'all',
+        },
+        {
+          name: 'Одежда',
+          url: 'clothes',
+        },
+        {
+          name: 'Аксессуары',
+          url: 'accessories',
+        },
+      ],
       navLinks: [
         {
           name: 'Оргсхема',
@@ -187,6 +194,9 @@ export default {
     },
     changeActiveLink(link) {
       this.selectedLink = link.url;
+    },
+    changeActiveTab(tab) {
+      this.selectedTab = tab.url;
     },
     openPopup(item) {
       this.togglePopup();
