@@ -3,64 +3,11 @@
     <div class="page">
       <Header @updateUserInfo="updateUserInfo" :infoUser="infoUser"></Header>
       <div class="navigation">
-        <aside class="navigation__wrapper">
-          <nav class="navigation__container">
-            <a
-              target="_blank"
-              class="navigation__link"
-              href="https://www.example.com/"
-              >Оргсхема</a
-            >
-            <a
-              target="_blank"
-              class="navigation__link"
-              href="https://www.example.com/"
-              >Kolesa Team</a
-            >
-            <a
-              target="_blank"
-              class="navigation__link navigation__link_active"
-              href="https://www.example.com/"
-              >Kolesa Shop</a
-            >
-            <a
-              target="_blank"
-              class="navigation__link"
-              href="https://www.example.com/"
-              >Картина компании</a
-            >
-            <a
-              target="_blank"
-              class="navigation__link"
-              href="https://www.example.com/"
-              >Новости</a
-            >
-            <a
-              target="_blank"
-              class="navigation__link"
-              href="https://www.example.com/"
-              >Education</a
-            >
-            <a
-              target="_blank"
-              class="navigation__link"
-              href="https://www.example.com/"
-              >Guidelines</a
-            >
-            <a
-              target="_blank"
-              class="navigation__link"
-              href="https://www.example.com/"
-              >Библиотека</a
-            >
-            <a
-              target="_blank"
-              class="navigation__link"
-              href="https://www.example.com/"
-              >FAQ</a
-            >
-          </nav>
-        </aside>
+        <Navigation
+          :nav-links="navLinks"
+          :selected-link="selectedLink"
+          @setActiveLink="changeActiveLink"
+        ></Navigation>
 
         <main class="main">
           <h1 class="main__title">Магазин мерча Kolesa Group</h1>
@@ -160,6 +107,7 @@
 import Header from './components/Header.vue';
 import Popup from './components/Popup.vue';
 import Card from './components/Card.vue';
+import Navigation from './components/Navigation.vue';
 
 export default {
   name: 'App',
@@ -167,6 +115,7 @@ export default {
     Header,
     Popup,
     Card,
+    Navigation,
   },
   computed: {
     allCards() {
@@ -199,6 +148,45 @@ export default {
     return {
       isShow: false,
       selectedTab: 'all',
+      navLinks: [
+        {
+          name: 'Оргсхема',
+          slug: 'orgscheme',
+        },
+        {
+          name: 'Kolesa Team',
+          slug: 'team',
+        },
+        {
+          name: 'Kolesa Shop',
+          slug: 'shop',
+        },
+        {
+          name: 'Картина компании',
+          slug: 'overview',
+        },
+        {
+          name: 'Новости',
+          slug: 'news',
+        },
+        {
+          name: 'Education',
+          slug: 'education',
+        },
+        {
+          name: 'Guidelines',
+          slug: 'guidelines',
+        },
+        {
+          name: 'Библиотека',
+          slug: 'library',
+        },
+        {
+          name: 'FAQ',
+          slug: 'faq',
+        },
+      ],
+      selectedLink: 'shop',
       cards: [
         { id: 1, name: 'Одежда' },
         { id: 2, name: 'Одежда' },
