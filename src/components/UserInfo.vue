@@ -33,7 +33,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.userInfo = data;
-          this.$emit('userInfo', this.userInfo);
+          this.$emit('updateUserInfo', this.userInfo);
         })
         .catch((err) => {
           console.log(err);

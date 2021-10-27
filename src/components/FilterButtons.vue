@@ -3,7 +3,7 @@
     <button
       v-for="(tab, index) in tabs"
       class="main__category-button"
-      :class="{ 'main__category-button_active': selectedTab === tab.slug }"
+      :class="{ 'main__category-button_active': selectedTab === tab.url }"
       :key="index"
       @click="setActiveTab(tab)"
     > {{ tab.name }}

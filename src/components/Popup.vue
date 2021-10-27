@@ -5,42 +5,14 @@
         <img
           class="popup__slider-image"
           :src="popupData.mainImage"
-          alt="${name}"
+          :alt="popupData.title"
           width="330"
           height="330"
         />
-        <ul class="popup__slider-preview">
-          <li>
-            <img
-              class="popup__slider-preview-image"
-              src="@/assets/images/product-images/amr-taha.jpg"
-              alt='Футболка "Эволюционируй или сдохни"'
-              width="50"
-              height="50"
-              v-if="popupData.images"
-            />
-          </li>
-          <li>
-            <img
-              class="
-                popup__slider-preview-image popup__slider-preview-image_active
-              "
-              src="@/assets/images/product-images/amr-taha.jpg"
-              alt="${name}"
-              width="50"
-              height="50"
-              v-if="popupData.images"
-            />
-          </li>
-          <li>
-            <img
-              class="popup__slider-preview-image"
-              src="@/assets/images/product-images/amr-taha.jpg"
-              alt='Футболка "Эволюционируй или сдохни"'
-              width="50"
-              height="50"
-            />
-          </li>
+        <ul
+          v-if="popupData.images"
+          v-html="generatePreviews(popupData.images)"
+          class="popup__slider-preview">
         </ul>
       </div>
       <form action="" class="popup__form">
@@ -49,52 +21,36 @@
           <div class="popup__info-container">
             <span class="popup__price">{{ popupData.price }} баллов</span>
             <button class="submit-button" type="submit" @click="removeBalance">Заказать</button>
-            <p v-if="isError">
+            <p class="popup__error" v-if="isError">
             Внимание! У Вас недостаточно баллов для покупки!
             </p>
           </div>
           <div class="balance">
             <span class="balance__title">Твой балланс:</span>
-            <span class="balance__count">{{ userInfo.score }} баллов </span>
+            <span class="balance__count">{{ userInfo.score }} баллов</span>
           </div>
         </div>
         <fieldset class="popup__form-data">
           <h4 class="popup__checkbox-title" v-if="popupData.colors">Цвета:</h4>
-          <ul class="checkbox-list" v-if="popupData.colors">
-            <li class="checkbox__list-item">
-              <input
-                class="popup__input"
-                name="color"
-                type="radio"
-                id="blue"
-                value="blue"
-                required
-              />
-              <label
-                for="blue"
-                class="popup__label popup__label_color"
-              >
-                <span
-                  style="background-color: blue"
-                  class="popup__color"
-                ></span
-                >blue
-              </label>
-            </li>
+          <ul
+            v-html="generateColors(popupData.colors)"
+            class="checkbox-list"
+            v-if="popupData.colors"
+          >
           </ul>
-          <h4 class="popup__checkbox-title">Размер:</h4>
-          <ul class="checkbox-list">
-            <li class="checkbox-list__item">
-              <input
-                class="popup__input"
-                name="size"
-                type="radio"
-                id="size-m"
-                value="size-m"
-                required
-              />
-              <label for="size-m" class="popup__label">m</label>
-            </li>
+          <h4 class="popup__checkbox-title" v-if="popupData.sizes">Размер:</h4>
+          <ul
+            class="checkbox-list"
+            v-html="generateSizes(popupData.sizes)"
+            v-if="popupData.sizes"
+          >
+          </ul>
+          <h4 class="popup__checkbox-title" v-if="popupData.volumes">Объем:</h4>
+          <ul
+            class="checkbox-list"
+            v-html="generateVolumes(popupData.volumes)"
+            v-if="popupData.volumes"
+          >
           </ul>
         </fieldset>
         <h4 class="popup__details">Детали:</h4>
@@ -142,6 +98,83 @@ export default {
       }
       this.$emit('removeBalance', this.popupData.price);
       this.$emit('togglePopup');
+    },
+    created() {
+      console.log(this.userInfo);
+    },
+    generatePreviews(images) {
+      return images
+        .map(
+          (image) => `<img
+              class="popup__slider-preview-image"
+              src=${image}
+              alt='Изображение товара'
+              width="50"
+              height="50"
+            />
+          </li>`,
+        )
+        .join('');
+    },
+    generateVolumes(volumes) {
+      return volumes
+        .map(
+          (volume) => `<li class="checkbox-list__item">
+              <input
+                class="popup__input"
+                name="volume"
+                type="radio"
+                id="volume-${volume}"
+                value="volume-${volume}"
+                required
+              />
+              <label for="volume-${volume}" class="popup__label">${volume}</label>
+            </li>`,
+        )
+        .join('');
+    },
+    generateSizes(sizes) {
+      return sizes
+        .map(
+          (size) => `<li class="checkbox-list__item">
+              <input
+                class="popup__input"
+                name="size"
+                type="radio"
+                id="size-${size}"
+                value="size-${size}"
+                required
+              />
+              <label for="size-${size}" class="popup__label">${size}</label>
+            </li>`,
+        )
+        .join('');
+    },
+    generateColors(colors) {
+      return colors
+        .map(
+          (color) => `<li class="checkbox__list-item">
+              <input
+                class="popup__input"
+                name="color"
+                type="radio"
+                id=${color.label}
+                value=${color.label}
+                required
+              />
+              <label
+                for=${color.label}
+                class="popup__label popup__label_color"
+              >
+                <span
+                  style="background-color: ${color.color}"
+                  class="popup__color"
+                ></span
+                >${color.label}
+              </label>
+            </li>`,
+        )
+        .join('');
     },
   },
 };

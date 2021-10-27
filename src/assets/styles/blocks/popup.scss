@@ -29,6 +29,10 @@
         gap: 24px;
     }
 
+    &__error {
+        color: red;
+    }
+
     &__title {
         margin: 8px 0 8px;
         font-size: 20px;

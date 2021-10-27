@@ -7,7 +7,7 @@
     ></a>
     <div class="header__container">
       <Search />
-      <UserInfo @updateUserInfo="updateUserInfo" :infoUser="infoUser" />
+      <UserInfo @updateUserInfo="updateUserInfo" :infoUser="userInfo" />
 
     </div>
   </header>
@@ -24,7 +24,7 @@ export default {
     UserInfo,
   },
   props: {
-    infoUser: Object,
+    userInfo: Object,
   },
   methods: {
     updateUserInfo(userInfo) {

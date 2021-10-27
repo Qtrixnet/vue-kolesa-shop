@@ -25,7 +25,6 @@
             @setActiveTab="changeActiveTab"
           />
           <ul class="cards-list">
-            <!-- Контейнер для рендеринга карточек товара -->
             <Card
               v-for="item in filterCategories"
               :key="item.id"
@@ -70,7 +69,6 @@ export default {
   },
   computed: {
     allCards() {
-      console.log(this.clothes);
       return [...this.clothes, ...this.accessories];
     },
 
@@ -163,7 +161,6 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           this.clothes = data;
         })
         .catch((err) => {
@@ -178,7 +175,6 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           this.accessories = data;
         })
         .catch((err) => {
