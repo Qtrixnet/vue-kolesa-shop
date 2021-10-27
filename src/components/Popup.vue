@@ -4,7 +4,7 @@
       <div class="popup__slider">
         <img
           class="popup__slider-image"
-          src="@/assets/images/product-images/amr-taha.jpg"
+          :src="popupData.mainImage"
           alt="${name}"
           width="330"
           height="330"
@@ -17,6 +17,7 @@
               alt='Футболка "Эволюционируй или сдохни"'
               width="50"
               height="50"
+              v-if="popupData.images"
             />
           </li>
           <li>
@@ -28,6 +29,7 @@
               alt="${name}"
               width="50"
               height="50"
+              v-if="popupData.images"
             />
           </li>
           <li>
@@ -42,20 +44,23 @@
         </ul>
       </div>
       <form action="" class="popup__form">
-        <h2 class="popup__title">Заголовок</h2>
+        <h2 class="popup__title">{{ popupData.title }}</h2>
         <div class="popup__main-info">
           <div class="popup__info-container">
-            <span class="popup__price">20 баллов</span>
-            <button class="submit-button" type="submit">Заказать</button>
+            <span class="popup__price">{{ popupData.price }} баллов</span>
+            <button class="submit-button" type="submit" @click="removeBalance">Заказать</button>
+            <p v-if="isError">
+            Внимание! У Вас недостаточно баллов для покупки!
+            </p>
           </div>
           <div class="balance">
             <span class="balance__title">Твой балланс:</span>
-            <span class="balance__count"> 3000 баллов </span>
+            <span class="balance__count">{{ userInfo.score }} баллов </span>
           </div>
         </div>
         <fieldset class="popup__form-data">
-          <h4 class="popup__checkbox-title">Цвета:</h4>
-          <ul class="checkbox-list">
+          <h4 class="popup__checkbox-title" v-if="popupData.colors">Цвета:</h4>
+          <ul class="checkbox-list" v-if="popupData.colors">
             <li class="checkbox__list-item">
               <input
                 class="popup__input"
@@ -93,17 +98,17 @@
           </ul>
         </fieldset>
         <h4 class="popup__details">Детали:</h4>
-        <h3 class="popup__details-text">Текст деталей</h3>
+        <h3 class="popup__details-text">{{ popupData.description }}</h3>
         <h4 class="popup__details">Как выбрать размер:</h4>
         <h3 class="popup__details-text">Написать дяде Рику для уточнения.</h3>
       </form>
       <button
         type="button"
-        @click="closePopup"
+        @click="togglePopup"
         class="popup__close-button"
       ></button>
     </div>
-    <div @click="closePopup" class="popup__overlay"></div>
+    <div @click="togglePopup" class="popup__overlay"></div>
   </div>
 </template>
 
@@ -112,18 +117,31 @@ export default {
   name: 'Popup',
   props: {
     isOpen: Boolean,
+    popupData: Object,
+    userInfo: Object,
   },
   data() {
     return {
-      isShow: true,
+      isError: false,
     };
   },
   methods: {
+    togglePopup() {
+      this.$emit('togglePopup');
+    },
     openPopup() {
-      this.isShow = true;
+      this.isOpen = true;
     },
     closePopup() {
-      this.isShow = false;
+      this.isOpen = false;
+    },
+    removeBalance() {
+      if (this.userInfo.score < this.popupData.price) {
+        this.isError = true;
+        return;
+      }
+      this.$emit('removeBalance', this.popupData.price);
+      this.$emit('togglePopup');
     },
   },
 };

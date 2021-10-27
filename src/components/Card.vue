@@ -7,14 +7,22 @@
           width="330"
           height="330"
           class="card__image"
+          :src="item.mainImage"
+          :alt="item.description"
         />
-        <span class="card__new">new</span>
+        <span v-if="item.isNew" class="card__new">new</span>
       </div>
       <div class="card__info">
-        <span class="card__price">190 баллов</span>
-        <h2 class="card__title">Название товара</h2>
-        <span class="card__scale">Размеры</span>
-        <button @click="openPopup(item)" class="card__button">Заказать</button>
+        <span class="card__price" v-if="item.price">{{ item.price }} баллов</span>
+        <span class="card__price" v-else>Цена по запросу</span>
+        <h2 class="card__title">{{ item.title }}</h2>
+        <span
+          class="card__scale"
+          v-if="item.sizes && item.sizes.length"
+        >
+          Размеры: {{ item.sizes.join(' / ') }}
+        </span>
+        <button @click="openPopup(item)" :data-id="item.id" class="card__button">Заказать</button>
       </div>
     </div>
   </li>
@@ -27,19 +35,10 @@ export default {
     item: Object,
   },
   methods: {
-    openPopup() {
-      this.isShow = true;
+    openPopup(item) {
+      console.log(item);
       this.$emit('openPopup', this.item);
     },
-    closePopup() {
-      this.isShow = false;
-    },
   },
-  // methods: {
-  //   openCard(item) {
-  //     console.log(item);
-  //     this.$emit("openCard", this.item);
-  //   },
-  // },
 };
 </script>

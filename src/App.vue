@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="page">
-      <Header @updateUserInfo="updateUserInfo" :infoUser="infoUser" />
+      <Header @updateUserInfo="updateUserInfo" :userInfo="userInfo" />
       <div class="navigation">
         <Navigation
           :nav-links="navLinks"
@@ -26,14 +26,24 @@
           />
           <ul class="cards-list">
             <!-- Контейнер для рендеринга карточек товара -->
-            <card
-            @togglePopup="togglePopup"
-            @openPopup="openPopup"></card>
+            <Card
+              v-for="item in filterCategories"
+              :key="item.id"
+              :item="item"
+              @togglePopup="togglePopup"
+              @openPopup="openPopup"
+            />
           </ul>
         </main>
       </div>
       <Footer />
-      <popup @togglePopup="togglePopup" :isOpen="isShow"></popup>
+      <Popup
+        @togglePopup="togglePopup"
+        :isOpen="isOpen"
+        :popupData="popupData"
+        @removeBalance="updateUserBalance"
+        :userInfo="userInfo"
+      />
     </div>
   </div>
 </template>
@@ -46,15 +56,6 @@ import Navigation from './components/Navigation.vue';
 import Footer from './components/Footer.vue';
 import HotButtons from './components/HotButtons.vue';
 import FilterButtons from './components/FilterButtons.vue';
-
-//* Модалка
-//* Блок поиск
-//* Блок пользователь
-//* Навигационный меню (Nav sidebar)
-//* Горячая кнопка
-//! Фильтр
-//* Карточка товара
-//* Подвал (Footer)
 
 export default {
   name: 'App',
@@ -76,27 +77,23 @@ export default {
     allCardsSorted() {
       return this.allCards
         .slice()
-        .sort((card) => (!card.isNew ? 1 : -1));
+        .sort((card) => (card.isNew ? -1 : 1));
     },
 
     filterCategories() {
-      console.log(1);
       if (this.selectedTab === 'all') {
-        console.log(2);
         return this.allCardsSorted;
       }
       if (this.selectedTab === 'clothes') {
-        console.log(3);
         return this.clothes;
       }
-      console.log(4);
       return this.accessories;
     },
 
   },
   data() {
     return {
-      isShow: false,
+      isOpen: false,
       selectedTab: 'all',
       tabs: [
         {
@@ -150,15 +147,11 @@ export default {
           url: 'faq',
         },
       ],
+      clothes: [],
+      accessories: [],
       selectedLink: 'shop',
-      cards: [
-        { id: 1, name: 'Одежда' },
-        { id: 2, name: 'Одежда' },
-        { id: 3, name: 'Одежда' },
-        { id: 4, name: 'Одежда' },
-        { id: 5, name: 'Одежда' },
-        { id: 6, name: 'Одежда' },
-      ],
+      userInfo: {},
+      popupData: {},
     };
   },
   methods: {
@@ -203,10 +196,13 @@ export default {
       this.popupData = item;
     },
     togglePopup() {
-      this.isPopupShow = !this.isPopupShow;
+      this.isOpen = !this.isOpen;
     },
     updateUserInfo(userInfo) {
-      this.infoUser = userInfo;
+      this.userInfo = userInfo;
+    },
+    updateUserBalance(price) {
+      this.userInfo.score -= price;
     },
   },
   created() {
