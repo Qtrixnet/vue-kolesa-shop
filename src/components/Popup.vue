@@ -22,7 +22,7 @@
             <span class="popup__price">{{ popupData.price }} баллов</span>
             <button class="submit-button" type="submit" @click="removeBalance">Заказать</button>
             <p class="popup__error" v-if="isError">
-            Внимание! У Вас недостаточно баллов для покупки!
+              Внимание! У Вас недостаточно баллов для покупки!
             </p>
           </div>
           <div class="balance">
