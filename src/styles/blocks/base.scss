@@ -1,7 +1,7 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 $green: #64bd38;
@@ -25,28 +25,32 @@ $text-size-secondary: 14px;
 $text-main-line-height: 24px;
 
 @mixin main-text {
-    font: {
-        size: $text-size-primary
-    }
+  font: {
+    size: $text-size-primary;
+  }
 
-    line-height: $text-main-line-height
+  line-height: $text-main-line-height;
 }
 
 @mixin main-subtext {
-    font: {
-        size: $text-size-secondary
-    }
+  font: {
+    size: $text-size-secondary;
+  }
 
-    line-height: $text-main-line-height
+  line-height: $text-main-line-height;
 }
 
 @mixin list-reset {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 @mixin max-width {
-    width: 100%;
-    max-width: 1440px;
+  width: 100%;
+  max-width: 1440px;
+}
+
+@mixin box-shadow($x, $y, $blur, $color) {
+  box-shadow: $x $y $blur $color;
 }

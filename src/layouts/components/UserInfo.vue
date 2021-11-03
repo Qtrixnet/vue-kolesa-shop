@@ -23,23 +23,6 @@ export default {
   props: {
     infoUser: Object,
   },
-  methods: {
-    getUserInfo() {
-      fetch('https://api.json-generator.com/templates/7ZW3y5GAuIge/data', {
-        headers: {
-          Authorization: 'Bearer rhhrmjvdvcv0ka4e6ouao9a1gj42fbjim5bcu60f',
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          this.userInfo = data;
-          this.$emit('updateUserInfo', this.userInfo);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
   created() {
     this.getUserInfo();
   },
