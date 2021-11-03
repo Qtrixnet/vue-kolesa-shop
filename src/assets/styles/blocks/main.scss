@@ -1,0 +1,88 @@
+.main {
+    align-items: center;
+    max-width: 1038px;
+    width: 100%;
+
+    &__title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        visibility: hidden;
+    }
+
+    &__point-button-container {
+        margin: 24px 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 24px;
+        width: 100%;
+    }
+
+    &__point-button {
+        padding: 0 22px 0 70px;
+        border-radius: 16px;
+        border: 0;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 32px;
+        background-repeat: no-repeat;
+        background-position: 24px 50%;
+        transition: all 0.2s ease;
+        align-items: center;
+        min-height: 76px;
+
+        &:hover {
+            cursor: pointer;
+            background-position: 24px 40%;
+            color: $blue-primary;
+        }
+
+        &_add {
+            background-image: url('./assets/images/plus.png');
+            background-color: $light-green;
+        }
+
+        &_how {
+            background-image: url('./assets/images/how.png');
+            background-color: $light-yellow;
+        }
+
+        &_gift {
+            background-image: url('./assets/images/gift.png');
+            background-color: $light-blue;
+        }
+    }
+
+    &__category-button-container {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+    }
+
+    &__category-button {
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        color: $blue-primary;
+        border-radius: 8px;
+        border: 1px solid $color-buttor-border;
+        background-color: transparent;
+        padding: 5px 20px;
+        transition: all 0.2s ease;
+
+        &_active {
+            background-color: $color-label-background;
+            color: $black;
+            border-color: $color-label-background;
+            cursor: pointer;
+        }
+
+        &:hover {
+            background-color: $color-label-background;
+            color: $black;
+            border-color: $color-label-background;
+            cursor: pointer;
+        }
+    }
+}
